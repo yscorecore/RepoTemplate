@@ -15,7 +15,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
-    - name: 03 Build with dotnet
+    - name: 03 Check Code Format
+      run: dotnet format --dry-run --check
+    - name: 04 Build with dotnet
       run: dotnet build
-    - name: 04 Run Unit test
+    - name: 05 Run Unit test
       run: dotnet test
