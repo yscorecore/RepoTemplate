@@ -16,7 +16,7 @@ jobs:
       with:
         dotnet-version: 3.1.100
     - name: 03 Check Code Format
-      run: dotnet format --dry-run --check
+      run: dotnet tool install -g dotnet-format && dotnet format --dry-run --check
     - name: 04 Build with dotnet
       run: dotnet build
     - name: 05 Run Unit test
