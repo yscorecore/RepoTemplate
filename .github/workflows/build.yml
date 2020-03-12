@@ -22,4 +22,12 @@ jobs:
     - name: 05 Build with dotnet
       run: dotnet build
     - name: 06 Run Unit test
-      run: dotnet test
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+    - name: 07 Combin All Test Report
+      run: dotnet tool install -g dotnet-reportgenerator-globaltool && reportgenerator  -reports:test/*/coverage.cobertura.xml -reporttype:cobertura -targetdir:.
+    - name: 08 Upload coverage to Codecov  
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        flags: unittests
+        fail_ci_if_error: true
