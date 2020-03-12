@@ -34,6 +34,6 @@ jobs:
     - name: 10 Set Pack Version
       run: echo "::set-env name=PACK_VERSION::${GIT_TAG#v}"
     - name: 11 Create Package
-      run: dotnet pack -p:PackageVersion=${PACK_VERSION} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o .publish --configuration Release
+      run: dotnet pack -p:PackageVersion=${PACK_VERSION} -p:RepositoryUrl=${{github.event.repository.url}} -p:PackageProjectUrl=${{github.event.repository.url}} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o .publish --configuration Release
     - name: 12 Push Package
       run: bash ./.github/scripts/pushpack.sh .publish ${{secrets.NUGET_APIKEY}}
