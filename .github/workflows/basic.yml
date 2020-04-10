@@ -1,4 +1,4 @@
-name: build
+name: basic
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
     tags-ignore:
       - "*"  
 jobs:
-  build:
+  basic:
     runs-on: ubuntu-latest
     steps:
     - name: 01 Checkout Code
