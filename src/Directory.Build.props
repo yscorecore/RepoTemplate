@@ -31,7 +31,6 @@
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
-
-            <Compile Include="..\AssemblyInfo.cs"></Compile>
+        <Compile Include="..\AssemblyInfo.cs"></Compile>
     </ItemGroup>
 </Project>
