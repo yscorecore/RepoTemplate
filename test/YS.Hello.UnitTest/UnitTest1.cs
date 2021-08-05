@@ -13,6 +13,6 @@ namespace Hello.UnitTest
             var result = c1.Say("world");
             result.Should().Be("Hello, world.");
         }
-        
+
     }
 }
