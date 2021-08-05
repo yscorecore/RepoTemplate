@@ -46,9 +46,10 @@ jobs:
       run: echo PACK_VERSION=${GIT_TAG#v} >> $GITHUB_ENV
     - name: 13 Create Package
       run: dotnet pack -p:PackageVersion=${PACK_VERSION} -p:RepositoryUrl=${{github.event.repository.url}} -p:PackageProjectUrl=${{github.event.repository.url}} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o .publish --configuration Release
-    - name: 14 Upload Release Assets
-      uses: AButler/upload-release-assets@v2.0
-      with:
-        files: '.publish/*;'
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: 14 Push Package
+      run: bash ./.github/scripts/pushpack.sh .publish ${{secrets.NUGET_APIKEY}}
+    - name: 15 Set Image Tag
+      run: echo IMAGE_VERSION=${GIT_TAG#v} >> $GITHUB_ENV
+    - name: 16 Build and Push Image Tag
+      run: bash ./.github/scripts/pushdocker.sh ${{secrets.DOCKER_USERNAME}} ${{secrets.DOCKER_PASSWORD}}
 
